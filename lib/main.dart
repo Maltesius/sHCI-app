@@ -147,8 +147,8 @@ class RankingPageState extends State<RankingPage>{
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Text(
+              'You have pushed the button $_counter times:',
             ),
             Text(
               '$_counter',
