@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
+import 'package:flutter/services.dart' show rootBundle;
+
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 
@@ -88,16 +93,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         animationDuration: const Duration(milliseconds: 1000),
       ),
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        centerTitle: true,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
       body: [homePage,secondPage][currentPageIndex],
       // This trailing comma makes auto-formatting nicer for build methods.
     );
@@ -112,18 +107,72 @@ class RankingPage extends StatefulWidget {
 }
 
 class RankingPageState extends State<RankingPage>{
-  int _counter = 0;
+  // Create a list containing the names of the images in the assets folder
+  Future<List<String>> loadImagePaths(String path) async {
+    List<String> imagePaths = [];
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+    try {
+      // Load the asset manifest file
+      String manifestContent = await rootBundle.loadString('AssetManifest.json');
+      Map<String, dynamic> manifestMap = json.decode(manifestContent);
+
+      // Get all asset paths under the specified directory
+      List<String> assets = manifestMap.keys
+          .where((String key) => key.startsWith(path))
+          .toList();
+
+      // Remove the 'packages/' prefix if present (for assets in packages)
+      assets = assets.map((String asset) {
+        return asset.replaceFirst('packages/', 'assets/packages/');
+      }).toList();
+
+      imagePaths = List<String>.from(assets);
+    } catch (e) {
+      print('Error loading image paths: $e');
+    }
+
+    return imagePaths;
+  }
+
+  int prevFirstIndex = 0;
+  int prevSecondIndex = 0;
+  String firstImage = 'assets/drinkImages/lilla.png'; // Initial placeholder image
+  String secondImage = 'assets/drinkImages/lilla.png'; // Initial placeholder image
+  late List<String> imagePaths;
+
+  @override
+  void initState() {
+    super.initState();
+    // Load image paths when the widget is initialized
+    loadImagePaths('assets/drinkImages/').then((paths) {
+      setState(() {
+        imagePaths = paths;
+      });
     });
   }
+
+  void changeImages() {
+    if (imagePaths.isNotEmpty) {
+      // Generate a random index to select a random image from the list
+      int randomFirstIndex = Random().nextInt(imagePaths.length);
+      int randomSecondIndex = Random().nextInt(imagePaths.length);
+      while (randomFirstIndex == randomSecondIndex || (randomFirstIndex == prevFirstIndex && randomSecondIndex == prevSecondIndex)) {
+        randomFirstIndex = Random().nextInt(imagePaths.length);
+        randomSecondIndex = Random().nextInt(imagePaths.length);
+      }
+
+      // Update the state with the new image path
+      setState(() {
+        firstImage = imagePaths[randomFirstIndex];
+        secondImage = imagePaths[randomSecondIndex];
+        prevFirstIndex = randomFirstIndex;
+        prevSecondIndex = randomSecondIndex;
+      });
+    }
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -131,38 +180,28 @@ class RankingPageState extends State<RankingPage>{
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button $_counter times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+        child:
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: IconButton(onPressed: changeImages, icon: Image(
+                    image: AssetImage(firstImage),
+                    ),
+                    ),
+                  ),
+                Expanded(
+                  flex: 1,
+                  child: IconButton(onPressed: changeImages, icon: Image(
+                    image: AssetImage(secondImage),
+                   ),
+                   ),
+                  ),
+              ],
+            ), // Make a grid that fits two IconButtons, such that the first IconButton fills the top half of the screen and the second IconButton fills the bottom half of the screen
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+      );
   }
 
 }
