@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:flutter/material.dart';
@@ -91,6 +92,7 @@ class RankingPage extends StatefulWidget {
 }
 
 class RankingPageState extends State<RankingPage>{
+  List<String> imagePaths = [];
   // Create a list containing the names of the images in the assets folder
   Future<List<String>> loadImagePaths(String path) async {
     List<String> imagePaths = [];
@@ -112,7 +114,9 @@ class RankingPageState extends State<RankingPage>{
 
       imagePaths = List<String>.from(assets);
     } catch (e) {
-      print('Error loading image paths: $e');
+      if (kDebugMode) {
+        print('Error loading image paths: $e');
+      }
     }
 
     return imagePaths;
@@ -122,7 +126,7 @@ class RankingPageState extends State<RankingPage>{
   int prevSecondIndex = 0;
   String firstImage = 'assets/drinkImages/lilla.png'; // Initial placeholder image
   String secondImage = 'assets/drinkImages/lilla.png'; // Initial placeholder image
-  late List<String> imagePaths;
+
 
   @override
   void initState() {
@@ -156,10 +160,9 @@ class RankingPageState extends State<RankingPage>{
   }
 
 
-
-
   @override
   Widget build(BuildContext context) {
+    changeImages();
     return Scaffold(
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
