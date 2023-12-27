@@ -1,21 +1,16 @@
-# Monster Energy Drink Ranker
+# navbar
 
-## Welcome to the Monster Energy Drink Ranker App!
+A new Flutter project.
 
-### Introduction
+## Getting Started
 
-The Monster Energy Drink Ranker is your ultimate source for discovering the best Monster Energy drinks based on personal and global rankings. Join the community, share your preferences, and find out which Monster Energy drink reigns supreme!
+This project is a starting point for a Flutter application.
 
-### Features
+A few resources to get you started if this is your first Flutter project:
 
-1. **Personal Rankings**: Create and manage your list of favorite Monster Energy drinks based on your taste preferences.
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-2. **Global Leaderboard**: Compare your rankings with the global Monster Energy community and see which drinks are the worldwide favorites.
-
-### How It Works
-
-1. **Create Your Profile**: Sign up and start ranking Monster Energy drinks to build your personal list.
-
-2. **Rank Your Favorites**: Browse the drinks and rate them based on your taste. Your personal rankings will help you keep track of your preferences.
-
-3. **Explore Global Rankings**: Check the global leaderboard to see the most popular Monster Energy drinks worldwide.
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
