@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "261190461441",
+    "firebase_url": "https://monster-ranker-app-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "monster-ranker-app",
+    "storage_bucket": "monster-ranker-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261190461441:android:674ba9783c17d1cb8a3800",
+        "android_client_info": {
+          "package_name": "com.example.navbar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgwclotqJWQTWXblmZVxqW4K8sqkxvCN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
