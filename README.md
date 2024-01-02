@@ -1,4 +1,4 @@
-# navbar
+# Monster Ranker App
 
 A new Flutter project.
 
