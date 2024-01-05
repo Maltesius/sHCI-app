@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 
-
 class RankingPage extends StatefulWidget {
   const RankingPage({super.key});
 
@@ -32,12 +31,12 @@ class RankingPageState extends State<RankingPage> {
     try {
       // Load the asset manifest file
       String manifestContent =
-      await rootBundle.loadString('AssetManifest.json');
+          await rootBundle.loadString('AssetManifest.json');
       Map<String, dynamic> manifestMap = json.decode(manifestContent);
 
       // Get all asset paths under the specified directory
       List<String> assets =
-      manifestMap.keys.where((String key) => key.startsWith(path)).toList();
+          manifestMap.keys.where((String key) => key.startsWith(path)).toList();
 
       // Remove the 'packages/' prefix if present (for assets in packages)
       assets = assets.map((String asset) {
@@ -102,9 +101,9 @@ class RankingPageState extends State<RankingPage> {
       const String pngString = '.png';
       const String prefix = 'assets/drinkImages/';
       String winnerString =
-      firstImage.replaceAll(pngString, '').replaceAll(prefix, '');
+          firstImage.replaceAll(pngString, '').replaceAll(prefix, '');
       String loserString =
-      secondImage.replaceAll(pngString, '').replaceAll(prefix, '');
+          secondImage.replaceAll(pngString, '').replaceAll(prefix, '');
 
       final nextMatchup = <String, dynamic>{
         'winner': winnerString,
@@ -116,7 +115,7 @@ class RankingPageState extends State<RankingPage> {
           .push()
           .set(nextMatchup)
           .then((_) => print(
-          "You have written to the database. First choice $winnerString won!"))
+              "You have written to the database. First choice $winnerString won!"))
           .catchError((error) => print('ERROR! $error'));
 
       // Update the state with the new image path
@@ -144,9 +143,9 @@ class RankingPageState extends State<RankingPage> {
       const String pngString = '.png';
       const String prefix = 'assets/drinkImages/';
       String loserString =
-      firstImage.replaceAll(pngString, '').replaceAll(prefix, '');
+          firstImage.replaceAll(pngString, '').replaceAll(prefix, '');
       String winnerString =
-      secondImage.replaceAll(pngString, '').replaceAll(prefix, '');
+          secondImage.replaceAll(pngString, '').replaceAll(prefix, '');
 
       final nextMatchup = <String, dynamic>{
         'winner': winnerString,
@@ -158,7 +157,7 @@ class RankingPageState extends State<RankingPage> {
           .push()
           .set(nextMatchup)
           .then((_) => print(
-          "You have written to the database. Second choice $winnerString won!"))
+              "You have written to the database. Second choice $winnerString won!"))
           .catchError((error) => print('ERROR! $error'));
 
       // Update the state with the new image path
@@ -175,6 +174,13 @@ class RankingPageState extends State<RankingPage> {
   Widget build(BuildContext context) {
     changeImages();
     return Scaffold(
+      appBar: AppBar(
+          title: const Text(
+            'Rank the Monsters!',
+            style: TextStyle(color: Colors.white),
+          ),
+          centerTitle: true,
+          backgroundColor: Theme.of(context).colorScheme.primary),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.

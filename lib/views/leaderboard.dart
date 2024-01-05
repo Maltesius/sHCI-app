@@ -9,7 +9,12 @@ class Leaderboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Monster Energy Leaderboard'),
+        title: const Text(
+          'Monster Energy Leaderboard',
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Center(
         child: Column(
@@ -20,8 +25,8 @@ class Leaderboard extends StatelessWidget {
                   final tilesList = <ListTile>[];
                   List<List<dynamic>> matchupList = [[]];
 
-
-                  if (snapshot.hasData && snapshot.data?.snapshot.value != null) {
+                  if (snapshot.hasData &&
+                      snapshot.data?.snapshot.value != null) {
                     final myMatchups = Map<String, dynamic>.from(
                         (snapshot.data! as DatabaseEvent).snapshot.value
                             as Map<dynamic, dynamic>);
@@ -56,10 +61,8 @@ class Leaderboard extends StatelessWidget {
                       final orderTile = ListTile(
                         leading: Image(
                             image: AssetImage('assets/drinkImages/$drink.png')),
-                        title: Text(
-                            drink,
-                            style: TextStyle(fontFamily: 'Noto')
-                        ),
+                        title:
+                            Text(drink, style: TextStyle(fontFamily: 'Noto')),
                         minVerticalPadding: 22,
                       );
                       tilesList.add(orderTile);
@@ -71,9 +74,13 @@ class Leaderboard extends StatelessWidget {
                     );
                   } else {
                     return Expanded(
-                      child: Text(
-                          'No votes have been made. Vote for your favorite now!'),
-                    );
+                        child: SizedBox(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                        heightFactor: 100,
+                        widthFactor: 100,
+                      ),
+                    ));
                   }
                 }),
           ],
