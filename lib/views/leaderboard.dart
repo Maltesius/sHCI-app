@@ -9,7 +9,12 @@ class Leaderboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Monster Energy Leaderboard'),
+        title: const Text(
+          'Monster Energy Leaderboard',
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Center(
         child: Column(
@@ -70,10 +75,10 @@ class Leaderboard extends StatelessWidget {
                   } else {
                     return Expanded(
                         child: SizedBox(
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          heightFactor: 100,
-                          widthFactor: 100,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                        heightFactor: 100,
+                        widthFactor: 100,
                       ),
                     ));
                   }

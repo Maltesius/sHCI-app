@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Monster Ranker',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: FutureBuilder(
@@ -59,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // These are the pages of the app
   get homePage => const RankingPage();
+
   get secondPage => Leaderboard();
 
   @override
