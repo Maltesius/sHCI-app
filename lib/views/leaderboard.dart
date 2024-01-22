@@ -22,30 +22,37 @@ class Leaderboard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () => {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => GlobalLeaderboard()),
-                ),
-              },
-              style: ElevatedButton.styleFrom(
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: ElevatedButton(
+                onPressed: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => GlobalLeaderboard()),
+                  ),
+                },
+                style: ElevatedButton.styleFrom(
                   minimumSize: const Size(300, 75),
-                  padding: const EdgeInsets.all(10.0)),
-              child: const Text("Global Leaderboard"),
+                ),
+                child: const Text("Global Leaderboard"),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () => {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PersonalLeaderboard()),
-                ),
-              },
-              style: ElevatedButton.styleFrom(
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: ElevatedButton(
+                onPressed: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PersonalLeaderboard()),
+                  ),
+                },
+                style: ElevatedButton.styleFrom(
                   minimumSize: const Size(300, 75),
-                  padding: const EdgeInsets.all(10.0)),
-              child: const Text("Personal Leaderboard"),
+                ),
+                child: const Text("Personal Leaderboard"),
+              ),
             ),
           ],
         ), // Make a grid that fits two IconButtons, such that the first IconButton fills the top half of the screen and the second IconButton fills the bottom half of the screen
