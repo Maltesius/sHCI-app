@@ -5,6 +5,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
 
+import '../database/Matchup.dart';
+import '../database/database_service.dart';
+
 class RankingPage extends StatefulWidget {
   const RankingPage({super.key});
 
@@ -14,6 +17,9 @@ class RankingPage extends StatefulWidget {
 
 class RankingPageState extends State<RankingPage> {
   final database = FirebaseDatabase.instance.ref();
+  final Matchup? matchup;
+
+  RankingPageState({Key? key, this.matchup});
 
   int prevFirstIndex = 0;
   int prevSecondIndex = 0;
@@ -86,7 +92,7 @@ class RankingPageState extends State<RankingPage> {
     }
   }
 
-  void changeImagesFirstWinner() {
+  Future<void> changeImagesFirstWinner() async {
     if (imagePaths.isNotEmpty) {
       // Generate a random index to select a random image from the list
       int randomFirstIndex = Random().nextInt(imagePaths.length);
@@ -117,6 +123,24 @@ class RankingPageState extends State<RankingPage> {
           .then((_) => print(
               "You have written to the database. First choice $winnerString won!"))
           .catchError((error) => print('ERROR! $error'));
+
+      final Matchup model = Matchup(
+          id: Random().nextInt(10000000),
+          winner: winnerString,
+          loser: loserString);
+      if (matchup == null) {
+        try {
+          DatabaseService.addMatchup(model);
+        } catch (e) {
+          throw Future.error(e);
+        }
+      } else {
+        try {
+          DatabaseService.updateMatchup(model);
+        } catch (e) {
+          throw Future.error(e);
+        }
+      }
 
       // Update the state with the new image path
       setState(() {
@@ -159,6 +183,24 @@ class RankingPageState extends State<RankingPage> {
           .then((_) => print(
               "You have written to the database. Second choice $winnerString won!"))
           .catchError((error) => print('ERROR! $error'));
+
+      final Matchup model = Matchup(
+          id: Random().nextInt(10000000),
+          winner: winnerString,
+          loser: loserString);
+      if (matchup == null) {
+        try {
+          DatabaseService.addMatchup(model);
+        } catch (e) {
+          throw Future.error(e);
+        }
+      } else {
+        try {
+          DatabaseService.updateMatchup(model);
+        } catch (e) {
+          throw Future.error(e);
+        }
+      }
 
       // Update the state with the new image path
       setState(() {
