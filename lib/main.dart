@@ -7,7 +7,9 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,]);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(MyApp());
 }
 
@@ -31,7 +33,6 @@ class MyApp extends StatelessWidget {
         future: _fbApp,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print('ERROR! ${snapshot.error.toString()}');
             return const Text("Something that shouldn't happen... happened");
           } else if (snapshot.hasData) {
             return const MyHomePage(title: 'Monster Ranker');
@@ -62,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // These are the pages of the app
   get homePage => const RankingPage();
 
-  get secondPage => Leaderboard();
+  get secondPage => const Leaderboard();
 
   @override
   Widget build(BuildContext context) {

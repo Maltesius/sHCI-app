@@ -38,6 +38,8 @@ dependencies:
   ranking: ^2.0.0
   firebase_core: ^2.24.2
   firebase_database: any
+  sqflite: ^2.3.0
+  path: ^1.8.3
 
 dev_dependencies:
   flutter_test:
