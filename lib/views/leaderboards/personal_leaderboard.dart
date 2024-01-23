@@ -62,14 +62,23 @@ class PersonalLeaderboard extends StatelessWidget {
                           print("$drink -> $score");
                         });
 
+                        final sortedScoresList = [];
+                        sortedScores.forEach((key, value) {sortedScoresList.add((key,value)); });
+
                         sortedScores.forEach((drink, score) {
+                          int index = sortedScoresList.indexOf((drink, score)) + 1;
+                          bool isFirstPlace = index == 1;
+                          bool isSecondPlace = index == 2;
+                          bool isThirdPlace = index == 3;
                           final orderTile = ListTile(
                             leading: Image(
                                 image: AssetImage(
                                     'assets/drinkImages/$drink.png')),
                             title: Text(drink,
                                 style: const TextStyle(fontFamily: 'Noto')),
+                            trailing: isFirstPlace ? Icon(Icons.looks_one_rounded) : isSecondPlace ? Icon(Icons.looks_two_rounded) : isThirdPlace ? Icon(IconData(0xf88c, fontFamily: 'MaterialIcons')) : Padding(padding: EdgeInsets.fromLTRB(0, 0, 9, 0), child: Text('$index', style: const TextStyle(fontFamily: 'Noto',fontWeight: FontWeight.w700 )),),
                             minVerticalPadding: 22,
+                            tileColor: isFirstPlace ? Colors.amber : isSecondPlace ? Colors.grey : isThirdPlace ? Colors.brown : Colors.white,
                           );
                           tilesList.add(orderTile);
                         });
