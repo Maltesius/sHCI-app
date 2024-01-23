@@ -22,7 +22,7 @@ class GlobalLeaderboard extends StatelessWidget {
             StreamBuilder(
                 stream: _database.child('matchups').orderByKey().onValue,
                 builder: (context, snapshot) {
-                  final tilesList = <ListTile>[];
+                  final tilesList = <Container>[];
                   List<List<dynamic>> matchupList = [[]];
 
                   if (snapshot.hasData &&
@@ -64,36 +64,65 @@ class GlobalLeaderboard extends StatelessWidget {
                       bool isFirstPlace = index == 1;
                       bool isSecondPlace = index == 2;
                       bool isThirdPlace = index == 3;
-                      final orderTile = ListTile(
+                      final orderTile = Container(decoration: isFirstPlace ? const BoxDecoration(
+                        // Create a gradient background
+                        gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          colors: [Colors.amber, Colors.white70, Colors.amber, Colors.amberAccent],
+                        ),
+                      ) : isSecondPlace ? const BoxDecoration(
+                        // Create a gradient background
+                        gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          colors: [Colors.grey, Colors.white54, Colors.grey, Colors.grey],
+                        ),
+                      ) : isThirdPlace ? const BoxDecoration(
+                        // Create a gradient background
+                        gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          colors: [Colors.brown, Colors.white38, Color.fromARGB(1, 136, 106, 80), Colors.brown],
+                        ),
+                      ) : const BoxDecoration(
+                        // Create a gradient background
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [Colors.white,Colors.white],
+                        ),
+                      ),child:ListTile(
                         leading: Image(
-                            image: AssetImage('assets/drinkImages/$drink.png')),
+                            image: AssetImage(
+                                'assets/drinkImages/$drink.png')),
                         title: Text(drink,
-                            style: const TextStyle(fontFamily: 'Noto')),
+                            style: const TextStyle(fontFamily: 'Noto', fontWeight: FontWeight.bold)),
                         trailing: isFirstPlace
                             ? Icon(Icons.looks_one_rounded)
                             : isSecondPlace
-                                ? Icon(Icons.looks_two_rounded)
-                                : isThirdPlace
-                                    ? Icon(IconData(0xf88c,
-                                        fontFamily: 'MaterialIcons'))
-                                    : Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(0, 0, 9, 0),
-                                        child: Text('$index',
-                                            style: const TextStyle(
-                                                fontFamily: 'Noto',
-                                                fontWeight: FontWeight.w700)),
-                                      ),
-                        // index of current tile
+                            ? Icon(Icons.looks_two_rounded)
+                            : isThirdPlace
+                            ? Icon(IconData(0xf88c,
+                            fontFamily: 'MaterialIcons'))
+                            : Padding(
+                          padding:
+                          EdgeInsets.fromLTRB(0, 0, 9, 0),
+                          child: Text('$index',
+                              style: const TextStyle(
+                                  fontFamily: 'Noto',
+                                  fontWeight:
+                                  FontWeight.w700)),
+                        ),
                         minVerticalPadding: 22,
                         tileColor: isFirstPlace
                             ? Colors.amber
                             : isSecondPlace
-                                ? Colors.grey
-                                : isThirdPlace
-                                    ? Colors.brown
-                                    : Colors.white,
-                      );
+                            ? Colors.grey
+                            : isThirdPlace
+                            ? Colors.brown
+                            : Colors.white,
+                      ),);
                       tilesList.add(orderTile);
                     });
                     return Expanded(
