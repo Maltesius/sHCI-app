@@ -63,10 +63,13 @@ class PersonalLeaderboard extends StatelessWidget {
                         });
 
                         final sortedScoresList = [];
-                        sortedScores.forEach((key, value) {sortedScoresList.add((key,value)); });
+                        sortedScores.forEach((key, value) {
+                          sortedScoresList.add((key, value));
+                        });
 
                         sortedScores.forEach((drink, score) {
-                          int index = sortedScoresList.indexOf((drink, score)) + 1;
+                          int index =
+                              sortedScoresList.indexOf((drink, score)) + 1;
                           bool isFirstPlace = index == 1;
                           bool isSecondPlace = index == 2;
                           bool isThirdPlace = index == 3;
@@ -76,9 +79,30 @@ class PersonalLeaderboard extends StatelessWidget {
                                     'assets/drinkImages/$drink.png')),
                             title: Text(drink,
                                 style: const TextStyle(fontFamily: 'Noto')),
-                            trailing: isFirstPlace ? Icon(Icons.looks_one_rounded) : isSecondPlace ? Icon(Icons.looks_two_rounded) : isThirdPlace ? Icon(IconData(0xf88c, fontFamily: 'MaterialIcons')) : Padding(padding: EdgeInsets.fromLTRB(0, 0, 9, 0), child: Text('$index', style: const TextStyle(fontFamily: 'Noto',fontWeight: FontWeight.w700 )),),
+                            trailing: isFirstPlace
+                                ? Icon(Icons.looks_one_rounded)
+                                : isSecondPlace
+                                    ? Icon(Icons.looks_two_rounded)
+                                    : isThirdPlace
+                                        ? Icon(IconData(0xf88c,
+                                            fontFamily: 'MaterialIcons'))
+                                        : Padding(
+                                            padding:
+                                                EdgeInsets.fromLTRB(0, 0, 9, 0),
+                                            child: Text('$index',
+                                                style: const TextStyle(
+                                                    fontFamily: 'Noto',
+                                                    fontWeight:
+                                                        FontWeight.w700)),
+                                          ),
                             minVerticalPadding: 22,
-                            tileColor: isFirstPlace ? Colors.amber : isSecondPlace ? Colors.grey : isThirdPlace ? Colors.brown : Colors.white,
+                            tileColor: isFirstPlace
+                                ? Colors.amber
+                                : isSecondPlace
+                                    ? Colors.grey
+                                    : isThirdPlace
+                                        ? Colors.brown
+                                        : Colors.white,
                           );
                           tilesList.add(orderTile);
                         });
@@ -99,13 +123,28 @@ class PersonalLeaderboard extends StatelessWidget {
                       }
                     }
                     return const Expanded(
-                        child: SizedBox(
                       child: Center(
                         heightFactor: 100,
                         widthFactor: 100,
-                        child: CircularProgressIndicator(),
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.close,
+                              color: Color.fromARGB(700, 100, 0, 0),
+                              size: 100,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                              child: Text(
+                                'No votes yet \n Go vote on your favorites!',
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.center,
+                        ),
                       ),
-                    ));
+                    );
                   })
             ],
           ),
