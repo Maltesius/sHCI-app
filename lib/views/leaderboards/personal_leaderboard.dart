@@ -155,6 +155,7 @@ class PersonalLeaderboard extends StatelessWidget {
                         heightFactor: 100,
                         widthFactor: 100,
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
                               Icons.close,
@@ -169,7 +170,6 @@ class PersonalLeaderboard extends StatelessWidget {
                               ),
                             )
                           ],
-                          mainAxisAlignment: MainAxisAlignment.center,
                         ),
                       ),
                     );
