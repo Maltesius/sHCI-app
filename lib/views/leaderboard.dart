@@ -11,8 +11,8 @@ class Leaderboard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           title: const Text(
-            'Leaderboard',
-            style: TextStyle(color: Colors.white),
+            'LEADERBOARD',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
           backgroundColor: Theme.of(context).colorScheme.primary),
