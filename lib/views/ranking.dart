@@ -212,44 +212,47 @@ class RankingPageState extends State<RankingPage> {
     }
   }
 
+  String versusAsset = 'assets/versus.png';
+
   @override
   Widget build(BuildContext context) {
     changeImages();
     return Scaffold(
       appBar: AppBar(
           title: const Text(
-            'Rank the Monsters!',
-            style: TextStyle(color: Colors.white),
+            'MONSTER RANKER',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
           backgroundColor: Theme.of(context).colorScheme.primary),
-      body: Center(
+      body: DecoratedBox(decoration: BoxDecoration( image: DecorationImage(image: AssetImage("assets/bg.png"), fit: BoxFit.fill))
+        ,child: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
+        child: Stack(alignment: Alignment.center,children: [Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
               flex: 1,
-              child: IconButton(
-                onPressed: changeImagesFirstWinner,
-                icon: Image(
+              child: Padding(padding: EdgeInsets.fromLTRB(0, 10, 140, 40), child: IconButton(
+                onPressed: changeImagesSecondWinner,
+                icon: Transform.rotate(angle: 0.25, child: Image(width: 300,
                   image: AssetImage(firstImage),
-                ),
-              ),
+                ),),
+              ),),
             ),
             Expanded(
               flex: 1,
-              child: IconButton(
+              child: Padding(padding: EdgeInsets.fromLTRB(140, 40, 0, 20), child: IconButton(
                 onPressed: changeImagesSecondWinner,
-                icon: Image(
+                icon: Transform.rotate(angle: 0.25, child: Image(width: 300,
                   image: AssetImage(secondImage),
-                ),
-              ),
+                ),),
+              ),),
             ),
           ],
-        ), // Make a grid that fits two IconButtons, such that the first IconButton fills the top half of the screen and the second IconButton fills the bottom half of the screen
-      ),
-    );
+        ), Center(child:  Image(image: AssetImage(versusAsset), height: 250,),)],), // Make a grid that fits two IconButtons, such that the first IconButton fills the top half of the screen and the second IconButton fills the bottom half of the screen
+      ),),
+    backgroundColor: Colors.grey.shade900,);
   }
 }
