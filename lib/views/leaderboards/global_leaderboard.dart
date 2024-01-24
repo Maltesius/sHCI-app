@@ -10,8 +10,8 @@ class GlobalLeaderboard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Global Leaderboard',
-          style: TextStyle(color: Colors.white),
+          'GLOBAL LEADERBOARD',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Theme.of(context).colorScheme.primary,
