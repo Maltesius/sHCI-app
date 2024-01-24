@@ -60,12 +60,3 @@ class Leaderboard extends StatelessWidget {
     );
   }
 }
-
-/*
-final orderTile = ListTile(
-                        leading: Icon(Icons.stars),
-                        title: Text(nextMatchup['winner']),
-                        subtitle: Text(nextMatchup['loser']));
-
-tilesList.add(orderTile);
-*/
