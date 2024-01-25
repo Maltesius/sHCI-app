@@ -22,7 +22,7 @@ class GlobalLeaderboard extends StatelessWidget {
             StreamBuilder(
                 stream: _database.child('matchups').orderByKey().onValue,
                 builder: (context, snapshot) {
-                  final tilesList = <Container>[];
+                  final tilesList = <Padding>[];
                   List<List<dynamic>> matchupList = [[]];
 
                   if (snapshot.hasData &&
@@ -64,88 +64,108 @@ class GlobalLeaderboard extends StatelessWidget {
                       bool isFirstPlace = index == 1;
                       bool isSecondPlace = index == 2;
                       bool isThirdPlace = index == 3;
-                      final orderTile = Container(
-                        decoration: isFirstPlace
-                            ? const BoxDecoration(
-                                // Create a gradient background
-                                gradient: LinearGradient(
-                                  begin: Alignment.topRight,
-                                  end: Alignment.bottomLeft,
-                                  colors: [
-                                    Colors.amber,
-                                    Colors.white70,
-                                    Colors.amber,
-                                    Colors.amberAccent
-                                  ],
-                                ),
-                              )
-                            : isSecondPlace
-                                ? const BoxDecoration(
-                                    // Create a gradient background
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topRight,
-                                      end: Alignment.bottomLeft,
-                                      colors: [
-                                        Colors.grey,
-                                        Colors.white54,
-                                        Colors.grey,
-                                        Colors.grey
-                                      ],
-                                    ),
-                                  )
-                                : isThirdPlace
-                                    ? const BoxDecoration(
-                                        // Create a gradient background
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topRight,
-                                          end: Alignment.bottomLeft,
-                                          colors: [
-                                            Colors.brown,
-                                            Colors.white38,
-                                            Color.fromARGB(1, 136, 106, 80),
-                                            Colors.brown
-                                          ],
-                                        ),
-                                      )
-                                    : const BoxDecoration(
-                                        // Create a gradient background
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: [Colors.white, Colors.white],
-                                        ),
+                      final orderTile = Padding(
+                        padding: isFirstPlace ? EdgeInsets.fromLTRB(10, 10, 10, 10) : EdgeInsets.fromLTRB(10, 0, 10, 10),
+                        child: Container(
+                          decoration: isFirstPlace
+                              ? BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  // Create a gradient background
+                                  gradient: const LinearGradient(
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft,
+                                    colors: [
+                                      Colors.amber,
+                                      Colors.white70,
+                                      Colors.amber,
+                                      Colors.amberAccent
+                                    ],
+                                  ),
+                                )
+                              : isSecondPlace
+                                  ? BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25),
+                                      // Create a gradient background
+                                      gradient: const LinearGradient(
+                                        begin: Alignment.topRight,
+                                        end: Alignment.bottomLeft,
+                                        colors: [
+                                          Colors.grey,
+                                          Colors.white54,
+                                          Colors.grey,
+                                          Colors.grey
+                                        ],
                                       ),
-                        child: ListTile(
-                          leading: Image(
-                              image:
-                                  AssetImage('assets/drinkImages/$drink.png')),
-                          title: Text(drink,
-                              style: const TextStyle(
-                                  fontFamily: 'Noto',
-                                  fontWeight: FontWeight.bold)),
-                          trailing: isFirstPlace
-                              ? const Icon(Icons.looks_one_rounded)
-                              : isSecondPlace
-                                  ? const Icon(Icons.looks_two_rounded)
+                                    )
                                   : isThirdPlace
-                                      ? const Icon(IconData(0xf88c,
-                                          fontFamily: 'MaterialIcons'))
-                                      : Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              0, 0, 9, 0),
-                                          child: Text('$index',
-                                              style: const TextStyle(
-                                                  fontFamily: 'Noto',
-                                                  fontWeight: FontWeight.w700)),
+                                      ? BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                          // Create a gradient background
+                                          gradient: const LinearGradient(
+                                            begin: Alignment.topRight,
+                                            end: Alignment.bottomLeft,
+                                            colors: [
+                                              Colors.brown,
+                                              Colors.white38,
+                                              Color.fromARGB(1, 136, 106, 80),
+                                              Colors.brown
+                                            ],
+                                          ),
+                                        )
+                                      : BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                          // Create a gradient background
+                                          gradient: const LinearGradient(
+                                            begin: Alignment.topRight,
+                                            end: Alignment.bottomLeft,
+                                            colors: [
+                                              Colors.lightBlueAccent,
+                                              Colors.white
+                                            ],
+                                          ),
                                         ),
-                          minVerticalPadding: 22,
-                          tileColor: isFirstPlace
-                              ? Colors.amber
-                              : isSecondPlace
-                                  ? Colors.grey
-                                  : isThirdPlace
-                                      ? Colors.brown
-                                      : Colors.white,
+                          child: ListTile(
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(25),
+                                    topRight: Radius.circular(25),
+                                    bottomRight: Radius.circular(25),
+                                    bottomLeft: Radius.circular(25))),
+                            leading: Image(
+                                image: AssetImage(
+                                    'assets/drinkImages/$drink.png')),
+                            title: Text(drink,
+                                style: const TextStyle(
+                                    fontFamily: 'Noto',
+                                    fontWeight: FontWeight.bold)),
+                            trailing: isFirstPlace
+                                ? const Icon(Icons.looks_one_rounded)
+                                : isSecondPlace
+                                    ? const Icon(Icons.looks_two_rounded)
+                                    : isThirdPlace
+                                        ? const Icon(IconData(0xf88c,
+                                            fontFamily: 'MaterialIcons'))
+                                        : Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 0, 9, 0),
+                                            child: Text('$index',
+                                                style: const TextStyle(
+                                                    fontFamily: 'Noto',
+                                                    fontWeight:
+                                                        FontWeight.w700,
+                                                fontSize: 15),),
+                                          ),
+                            minVerticalPadding: 22,
+                            tileColor: isFirstPlace
+                                ? Colors.amber
+                                : isSecondPlace
+                                    ? Colors.grey
+                                    : isThirdPlace
+                                        ? Colors.brown
+                                        : Colors.white,
+                          ),
                         ),
                       );
                       tilesList.add(orderTile);
