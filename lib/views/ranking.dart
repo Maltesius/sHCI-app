@@ -275,7 +275,7 @@ class RankingPageState extends State<RankingPage> {
               Center(
                 child: Image(
                   image: AssetImage(versusAsset),
-                  height: 250,
+                  height: 190,
                 ),
               )
             ],
