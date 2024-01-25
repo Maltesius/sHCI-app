@@ -65,7 +65,7 @@ class GlobalLeaderboard extends StatelessWidget {
                       bool isSecondPlace = index == 2;
                       bool isThirdPlace = index == 3;
                       final orderTile = Padding(
-                        padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        padding: isFirstPlace ? EdgeInsets.fromLTRB(10, 10, 10, 10) : EdgeInsets.fromLTRB(10, 0, 10, 10),
                         child: Container(
                           decoration: isFirstPlace
                               ? BoxDecoration(
