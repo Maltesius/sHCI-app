@@ -93,14 +93,18 @@ class RankingPageState extends State<RankingPage> {
     }
   }
 
-  Future<void> changeImagesFirstWinner() async {
+  void changeImagesFirstWinner() {
     if (imagePaths.isNotEmpty) {
       // Generate a random index to select a random image from the list
       int randomFirstIndex = Random().nextInt(imagePaths.length);
       int randomSecondIndex = Random().nextInt(imagePaths.length);
       while (randomFirstIndex == randomSecondIndex ||
           (randomFirstIndex == prevFirstIndex &&
-              randomSecondIndex == prevSecondIndex)) {
+              randomSecondIndex == prevSecondIndex) ||
+          (randomFirstIndex == prevSecondIndex &&
+              randomSecondIndex == prevFirstIndex) ||
+          randomFirstIndex == prevFirstIndex ||
+          randomSecondIndex == prevSecondIndex) {
         randomFirstIndex = Random().nextInt(imagePaths.length);
         randomSecondIndex = Random().nextInt(imagePaths.length);
       }
@@ -126,7 +130,7 @@ class RankingPageState extends State<RankingPage> {
           .catchError((error) => debugPrint('ERROR! $error'));
 
       final Matchup model = Matchup(
-          id: Random().nextInt(10000000),
+          id: DateTime.now().millisecondsSinceEpoch,
           winner: winnerString,
           loser: loserString);
       if (matchup == null) {
@@ -160,7 +164,11 @@ class RankingPageState extends State<RankingPage> {
       int randomSecondIndex = Random().nextInt(imagePaths.length);
       while (randomFirstIndex == randomSecondIndex ||
           (randomFirstIndex == prevFirstIndex &&
-              randomSecondIndex == prevSecondIndex)) {
+              randomSecondIndex == prevSecondIndex) ||
+          (randomFirstIndex == prevSecondIndex &&
+              randomSecondIndex == prevFirstIndex) ||
+          randomFirstIndex == prevFirstIndex ||
+          randomSecondIndex == prevSecondIndex) {
         randomFirstIndex = Random().nextInt(imagePaths.length);
         randomSecondIndex = Random().nextInt(imagePaths.length);
       }
@@ -186,7 +194,7 @@ class RankingPageState extends State<RankingPage> {
           .catchError((error) => debugPrint('ERROR! $error'));
 
       final Matchup model = Matchup(
-          id: Random().nextInt(10000000),
+          id: DateTime.now().millisecondsSinceEpoch,
           winner: winnerString,
           loser: loserString);
       if (matchup == null) {
@@ -222,14 +230,31 @@ class RankingPageState extends State<RankingPage> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         forceMaterialTransparency: true,
-          flexibleSpace: ClipRect(child:
-          BackdropFilter(filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), child: const Center(child: Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0),child: Text(
-            'MONSTER RANKER',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
-          ),),),)),
-          centerTitle: true,
-          backgroundColor: Theme.of(context).colorScheme.primary,
-      bottom: PreferredSize(preferredSize: const Size.fromHeight(2.0), child: Container(color: Colors.white, height: 2.0,)),),
+        flexibleSpace: ClipRect(
+            child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: const Center(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+              child: Text(
+                'MONSTER RANKER',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+            ),
+          ),
+        )),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(2.0),
+            child: Container(
+              color: Colors.white,
+              height: 2.0,
+            )),
+      ),
       body: DecoratedBox(
         decoration: const BoxDecoration(
             image: DecorationImage(
@@ -237,54 +262,57 @@ class RankingPageState extends State<RankingPage> {
         child: Center(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
-          child: Padding(padding: const EdgeInsets.fromLTRB(0, 80, 0, 0), child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 10, 140, 40),
-                      child: IconButton(
-                        onPressed: changeImagesSecondWinner,
-                        icon: Transform.rotate(
-                          angle: 0.25,
-                          child: Image(
-                            width: 300,
-                            image: AssetImage(firstImage),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 10, 140, 40),
+                        child: IconButton(
+                          onPressed: changeImagesFirstWinner,
+                          icon: Transform.rotate(
+                            angle: 0.25,
+                            child: Image(
+                              width: 300,
+                              image: AssetImage(firstImage),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(140, 40, 0, 10),
-                      child: IconButton(
-                        onPressed: changeImagesSecondWinner,
-                        icon: Transform.rotate(
-                          angle: 0.25,
-                          child: Image(
-                            width: 300,
-                            image: AssetImage(secondImage),
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(140, 40, 0, 10),
+                        child: IconButton(
+                          onPressed: changeImagesSecondWinner,
+                          icon: Transform.rotate(
+                            angle: 0.25,
+                            child: Image(
+                              width: 300,
+                              image: AssetImage(secondImage),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Center(
-                child: Image(
-                  image: AssetImage(versusAsset),
-                  height: 190,
+                  ],
                 ),
-              )
-            ],
-          ),),
+                Center(
+                  child: Image(
+                    image: AssetImage(versusAsset),
+                    height: 190,
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
       backgroundColor: Colors.grey.shade900,
