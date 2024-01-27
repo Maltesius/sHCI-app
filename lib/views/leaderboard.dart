@@ -15,7 +15,7 @@ class Leaderboard extends StatelessWidget {
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
-          backgroundColor: Colors.white),
+          backgroundColor: Theme.of(context).canvasColor),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
