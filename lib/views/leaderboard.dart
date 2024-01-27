@@ -12,10 +12,10 @@ class Leaderboard extends StatelessWidget {
       appBar: AppBar(
           title: const Text(
             'LEADERBOARD',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
-          backgroundColor: Theme.of(context).colorScheme.primary),
+          backgroundColor: Colors.white),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
