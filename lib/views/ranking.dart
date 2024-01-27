@@ -121,9 +121,9 @@ class RankingPageState extends State<RankingPage> {
           .child('matchups')
           .push()
           .set(nextMatchup)
-          .then((_) => print(
+          .then((_) => debugPrint(
               "You have written to the database. First choice $winnerString won!"))
-          .catchError((error) => print('ERROR! $error'));
+          .catchError((error) => debugPrint('ERROR! $error'));
 
       final Matchup model = Matchup(
           id: Random().nextInt(10000000),
@@ -181,9 +181,9 @@ class RankingPageState extends State<RankingPage> {
           .child('matchups')
           .push()
           .set(nextMatchup)
-          .then((_) => print(
+          .then((_) => debugPrint(
               "You have written to the database. Second choice $winnerString won!"))
-          .catchError((error) => print('ERROR! $error'));
+          .catchError((error) => debugPrint('ERROR! $error'));
 
       final Matchup model = Matchup(
           id: Random().nextInt(10000000),
