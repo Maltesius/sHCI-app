@@ -126,7 +126,7 @@ class RankingPageState extends State<RankingPage> {
           .catchError((error) => debugPrint('ERROR! $error'));
 
       final Matchup model = Matchup(
-          id: Random().nextInt(10000000),
+          id: DateTime.now().millisecondsSinceEpoch,
           winner: winnerString,
           loser: loserString);
       if (matchup == null) {
