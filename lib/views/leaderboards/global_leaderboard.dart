@@ -14,7 +14,7 @@ class GlobalLeaderboard extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).canvasColor,
       ),
       body: Center(
         child: Column(
