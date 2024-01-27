@@ -10,11 +10,11 @@ class GlobalLeaderboard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'GLOBAL LEADERBOARD',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          'GLOBAL',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Colors.white,
       ),
       body: Center(
         child: Column(
@@ -51,7 +51,7 @@ class GlobalLeaderboard extends StatelessWidget {
                         scores.entries.toList()
                           ..sort((e1, e2) => e2.value.compareTo(e1.value)));
                     sortedScores.forEach((drink, score) {
-                      print("$drink -> $score");
+                      debugPrint("$drink -> $score");
                     });
 
                     final sortedScoresList = [];
@@ -65,7 +65,7 @@ class GlobalLeaderboard extends StatelessWidget {
                       bool isSecondPlace = index == 2;
                       bool isThirdPlace = index == 3;
                       final orderTile = Padding(
-                        padding: isFirstPlace ? EdgeInsets.fromLTRB(10, 10, 10, 10) : EdgeInsets.fromLTRB(10, 0, 10, 10),
+                        padding: isFirstPlace ? const EdgeInsets.fromLTRB(10, 10, 10, 10) : const EdgeInsets.fromLTRB(10, 0, 10, 10),
                         child: Container(
                           decoration: isFirstPlace
                               ? BoxDecoration(

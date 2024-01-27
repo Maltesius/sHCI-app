@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'dart:ui';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -218,13 +219,17 @@ class RankingPageState extends State<RankingPage> {
   Widget build(BuildContext context) {
     changeImages();
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
-          title: const Text(
+        forceMaterialTransparency: true,
+          flexibleSpace: ClipRect(child:
+          BackdropFilter(filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), child: const Center(child: Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0),child: Text(
             'MONSTER RANKER',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+          ),),),)),
           centerTitle: true,
-          backgroundColor: Theme.of(context).colorScheme.primary),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+      bottom: PreferredSize(preferredSize: const Size.fromHeight(2.0), child: Container(color: Colors.white, height: 2.0,)),),
       body: DecoratedBox(
         decoration: const BoxDecoration(
             image: DecorationImage(
@@ -232,7 +237,7 @@ class RankingPageState extends State<RankingPage> {
         child: Center(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
-          child: Stack(
+          child: Padding(padding: const EdgeInsets.fromLTRB(0, 80, 0, 0), child: Stack(
             alignment: Alignment.center,
             children: [
               Column(
@@ -257,7 +262,7 @@ class RankingPageState extends State<RankingPage> {
                   Expanded(
                     flex: 1,
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(140, 40, 0, 20),
+                      padding: const EdgeInsets.fromLTRB(140, 40, 0, 10),
                       child: IconButton(
                         onPressed: changeImagesSecondWinner,
                         icon: Transform.rotate(
@@ -279,7 +284,7 @@ class RankingPageState extends State<RankingPage> {
                 ),
               )
             ],
-          ), // Make a grid that fits two IconButtons, such that the first IconButton fills the top half of the screen and the second IconButton fills the bottom half of the screen
+          ),),
         ),
       ),
       backgroundColor: Colors.grey.shade900,
