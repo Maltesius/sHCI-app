@@ -93,14 +93,18 @@ class RankingPageState extends State<RankingPage> {
     }
   }
 
-  Future<void> changeImagesFirstWinner() async {
+  void changeImagesFirstWinner() {
     if (imagePaths.isNotEmpty) {
       // Generate a random index to select a random image from the list
       int randomFirstIndex = Random().nextInt(imagePaths.length);
       int randomSecondIndex = Random().nextInt(imagePaths.length);
       while (randomFirstIndex == randomSecondIndex ||
           (randomFirstIndex == prevFirstIndex &&
-              randomSecondIndex == prevSecondIndex)) {
+              randomSecondIndex == prevSecondIndex) ||
+          (randomFirstIndex == prevSecondIndex &&
+              randomSecondIndex == prevFirstIndex) ||
+          randomFirstIndex == prevFirstIndex ||
+          randomSecondIndex == prevSecondIndex) {
         randomFirstIndex = Random().nextInt(imagePaths.length);
         randomSecondIndex = Random().nextInt(imagePaths.length);
       }
@@ -160,7 +164,11 @@ class RankingPageState extends State<RankingPage> {
       int randomSecondIndex = Random().nextInt(imagePaths.length);
       while (randomFirstIndex == randomSecondIndex ||
           (randomFirstIndex == prevFirstIndex &&
-              randomSecondIndex == prevSecondIndex)) {
+              randomSecondIndex == prevSecondIndex) ||
+          (randomFirstIndex == prevSecondIndex &&
+              randomSecondIndex == prevFirstIndex) ||
+          randomFirstIndex == prevFirstIndex ||
+          randomSecondIndex == prevSecondIndex) {
         randomFirstIndex = Random().nextInt(imagePaths.length);
         randomSecondIndex = Random().nextInt(imagePaths.length);
       }
