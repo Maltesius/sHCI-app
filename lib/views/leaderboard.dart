@@ -55,7 +55,7 @@ class Leaderboard extends StatelessWidget {
               ),
             ),
           ],
-        ), // Make a grid that fits two IconButtons, such that the first IconButton fills the top half of the screen and the second IconButton fills the bottom half of the screen
+        ),
       ),
     );
   }
